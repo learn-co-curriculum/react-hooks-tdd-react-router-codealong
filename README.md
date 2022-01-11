@@ -351,6 +351,10 @@ So we'll need a way to set the URL in the test environment to something like
 on that URL. To start, add the following test code:
 
 ```jsx
+// src/__tests__/Film.test.js
+
+import { BrowserRouter } from "react-router-dom";
+
 test("displays a Star Wars film's information based on the URL", async () => {
   // navigate to /films/1
   // TODO
@@ -380,6 +384,10 @@ environment using the [`history.pushState()`][push-state] method, and by setting
 up a `<Route>` component to match the appropriate URL:
 
 ```jsx
+// src/__tests__/Film.test.js
+
+import { BrowserRouter, Route } from "react-router-dom";
+
 test("displays a Star Wars film's information based on the URL", async () => {
   // navigate to /films/1
   window.history.pushState({}, "", "/films/1"); // add this line
@@ -473,6 +481,9 @@ Then, use it in the tests for the `<App>` component:
 ```jsx
 // src/__tests__/App.test.js
 
+import { screen } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
+import App from "../components/App";
 import { renderWithRouter } from "../test-utils";
 
 test("displays a list of films and allows a user to click a film to view the details", async () => {
@@ -508,7 +519,11 @@ This lets us update our tests for the `<Film>` component, and navigate to
 ```jsx
 // src/__tests__/Film.test.js
 
+import { screen } from "@testing-library/react";
+import { Route } from "react-router-dom";
+import Film from "../components/Film";
 import { renderWithRouter } from "../test-utils";
+
 test("displays a Star Wars film's information based on the URL", async () => {
   // navigate to /films/1
   // render the Film component
@@ -520,6 +535,8 @@ test("displays a Star Wars film's information based on the URL", async () => {
       route: "/films/1",
     }
   );
+  // ...rest of test
+});
 ```
 
 As a last step, we can make our `renderWithRouter` function more flexible by

@@ -579,7 +579,3 @@ when rendering them in the test environment.
 [wrapper]:
   https://testing-library.com/docs/react-testing-library/setup#custom-render
 [render]: https://testing-library.com/docs/react-testing-library/api#render
-
-```
-
-```
